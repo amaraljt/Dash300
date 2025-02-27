@@ -6,7 +6,6 @@ Delay_ms():
 */
 void Delay_ms(int delay){
     HAL_Delay(delay);
-    //for (volatile int i = 0; i < delay; i++) {}
 }
 
 /**
@@ -76,6 +75,8 @@ void Delay_ms(int delay){
   }
 
 /* 
+
+
 Clock_Init():
     Initializes GPIOA and USART1 Clock
 */
@@ -108,11 +109,37 @@ void GPIOA_Init(){
 }
 
 void GPIOA_Set_Pin(){
-    GPIOA->BSRR = (1 << GPIOA_PIN5); // Set Pin PA5 High
+    GPIOA->BSRR = (1 << 5); // Set Pin PA5 High
 }
 
 void GPIOA_Reset_Pin(){
     GPIOA->BSRR = (1 << 21); // Reset Pin PA5 Low
+}
+
+/*
+ISO_Init():
+    Initialize ISO-9141 communication by sending 0x33 @ 5 baud
+*/
+void ISO_Init(){
+    uint8_t data = 0x33;
+    // 1. Output PIN5 LOW
+    GPIOA->BSRR = (1 << 21);
+    Delay_ms(200);
+
+    // 2. Send 8 bit data 0x33
+    for(int i = 0; i < 8; i++){
+        uint8_t bit = (data >> i) & 1;
+        if(bit){
+            GPIOA->BSRR = (1 << 5);
+        }else{
+            GPIOA->BSRR = (1 << 21);
+        }
+        Delay_ms(200);
+    }
+
+    // 3. Output PIN5 HIGH
+    GPIOA->BSRR = (1 << 5);
+    Delay_ms(1000);
 }
 
 /*

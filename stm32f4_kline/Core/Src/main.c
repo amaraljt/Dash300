@@ -2,20 +2,20 @@
 #include "uart.h"
 #include <stdio.h>
 
-// void SystemClock_Config(void);
-
 int main(void){
-    GPIOA_Init();
-    
-    USART1_Init();
     /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
     HAL_Init();
 
-    /* Configure the system clock */
+    /* Configure the system, GPIOA & USART1 clock */
     SystemClock_Config();
+    GPIOA_Init();
+    USART1_Init();
 
     while(1){
-        USART1_SendData(0x33);
-        Delay_ms(200);
+        ISO_Init();
     }
 }
+
+// 0x9A - 10011010
+// 0x6A - 10100110
+// 0x33 - 00110011 (WORKS AFTER WAITING 10 SECONDS)

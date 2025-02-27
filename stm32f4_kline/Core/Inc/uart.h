@@ -15,7 +15,7 @@ void Clock_Init();
 void GPIOA_Init();
 void GPIOA_Set_Pin();
 void GPIOA_Reset_Pin();
-int USART1_Set_Baud(int baud);
+void ISO_Init();
 void USART1_Init();
 void USART1_SendData(uint8_t d);
 void USART1_SendString(char *str);
