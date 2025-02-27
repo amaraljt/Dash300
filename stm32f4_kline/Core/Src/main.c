@@ -4,7 +4,6 @@
 
 void SystemClock_Config(void);
 
-
 int main(void){
     GPIOA_Init();
     
@@ -16,7 +15,7 @@ int main(void){
     SystemClock_Config();
 
     while(1){
-        USART1_SendData(0x55);
+        USART1_SendData(0x33);
         Delay_ms(1000000);
     }
 }
@@ -67,6 +66,10 @@ void SystemClock_Config(void)
     Error_Handler();
   }
 }
+
+/* USER CODE BEGIN 4 */
+
+/* USER CODE END 4 */
 
 /**
   * @brief  This function is executed in case of error occurrence.

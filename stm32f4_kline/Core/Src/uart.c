@@ -54,10 +54,6 @@ void GPIOA_Reset_Pin(){
     GPIOA->BSRR = (1 << 21); // Reset Pin PA5 Low
 }
 
-int USART1_Set_Baud(int baud){
-    return USART1_CLK_FREQ / baud;
-}
-
 /*
 UART_Init():
     Initialize USART1
@@ -69,7 +65,7 @@ void USART1_Init(){
     USART1->CR1 |= (1 << 13);  // USART Enable
     USART1->CR1 &= ~(1 << 12); // 0: 1 Start bit, 8 Data bits, n Stop bit
     USART1->CR2 &= ~(3 << 12); // 1 stop bit
-    USART1->BRR = USART1_Set_Baud(5); // Initial Baud Rate of 5
+    USART1->BRR = USART1_CLK_FREQ / USART1_BAUD_RATE; // Initial Baud Rate of 5
 
     USART1->CR1 |= (1 << 3); // Transmitter Enabled
     USART1->CR1 |= (1 << 2); // Receiver Enabled

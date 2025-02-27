@@ -5,6 +5,7 @@
 
 #define GPIOA_PIN5 5
 #define USART1_CLK_FREQ 90000000
+#define USART1_BAUD_RATE 10400
 
 void Delay_ms();
 void Clock_Init();
